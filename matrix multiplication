@@ -1,0 +1,26 @@
+#include<stdio.h>
+int main(){
+    int i,j,a[2][2],b[2][2],mul[2][2];
+    printf("enter the values of matrix 1 \n");
+    for(i=0;i<2;i++){
+        for(j=0;j<2;j++){
+            scanf("%d",&a[i][j]);
+        }
+    }
+    printf("enter the values of matrix 2 \n");
+    for(i=0;i<2;i++){
+        for(j=0;j<2;j++){
+            scanf("%d",&b[i][j]);
+        }
+    }
+    for(i=0;i<2;i++){
+        for(j=0;j<2;j++){
+            mul[i][j]+=a[i][j]*b[i][j];
+        }
+    }
+    for(i=0;i<2;i++){
+        for(j=0;j<2;j++){
+            printf("%d ,",mul[i][j]);
+        }
+    }
+}
