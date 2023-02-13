@@ -1,0 +1,72 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_SIZE 100
+
+int stack[MAX_SIZE];
+int top = -1;
+
+void push(int item) {
+    if (top >= MAX_SIZE - 1) {
+        printf("Stack overflow\n");
+        return;
+    }
+    stack[++top] = item;
+}
+
+int pop() {
+    if (top < 0) {
+        printf("Stack underflow\n");
+        return -1;
+    }
+    return stack[top--];
+}
+
+int peek() {
+    if (top < 0) {
+        printf("Stack is empty\n");
+        return -1;
+    }
+    return stack[top];
+}
+
+int isBalanced(char *expression) {
+    int i;
+    for (i = 0; i < strlen(expression); i++) {
+        if (expression[i] == '(' || expression[i] == '[' || expression[i] == '{') {
+            push(expression[i]);
+        } else if (expression[i] == ')') {
+            if (peek() == '(') {
+                pop();
+            } else {
+                return 0;
+            }
+        } else if (expression[i] == ']') {
+            if (peek() == '[') {
+                pop();
+            } else {
+                return 0;
+            }
+        } else if (expression[i] == '}') {
+            if (peek() == '{') {
+                pop();
+            } else {
+                return 0;
+            }
+        }
+    }
+    return (top == -1);
+}
+
+int main() {
+    char expression[100];
+    printf("Enter an expression: ");
+    scanf("%s", expression);
+    if (isBalanced(expression)) {
+        printf("The expression is balanced\n");
+    } else {
+        printf("The expression is not balanced\n");
+    }
+    return 0;
+}
