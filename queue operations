@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_SIZE 100
+
+int queue[MAX_SIZE];
+int front = -1;
+int rear = -1;
+
+void enqueue(int value) {
+    if (rear == MAX_SIZE - 1) {
+        printf("Error: Queue overflow\n");
+    } else if (front == -1 && rear == -1) {
+        front = rear = 0;
+        queue[rear] = value;
+    } else {
+        rear++;
+        queue[rear] = value;
+    }
+}
+
+int dequeue() {
+    if (front == -1 || front > rear) {
+        printf("Error: Queue underflow\n");
+        return -1;
+    } else {
+        int value = queue[front];
+        front++;
+        return value;
+    }
+}
+
+void display() {
+    if (front == -1 || front > rear) {
+        printf("Error: Queue is empty\n");
+    } else {
+        printf("Queue elements are: ");
+        for (int i = front; i <= rear; i++) {
+            printf("%d ", queue[i]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    enqueue(1);
+    enqueue(2);
+    enqueue(3);
+
+    display();
+
+    printf("Dequeued element is %d\n", dequeue());
+
+    display();
+
+    return 0;
+}
